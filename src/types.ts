@@ -6,13 +6,18 @@ export function generarPuntuacionAleatoria(): Puntuacion {
 }*/
 
 export interface productsEntry {
-	id: string
-	nombre: string
-	precio1: string
-	precio2: string
-	descuento: string
-	Imagen: string
-	vendedor: string
-	envio: string
-	puntuacion: number
+  website: string
+  id: string
+  title: string
+  original_price: number
+  discount_price: number
+  offer_url: string
+  is_offer_day: boolean
+  is_available: boolean
+  delivery_is_free: string
+  category: { Id: string; Name: string }
+  discount_percentage: string
+  image: string
+  rating: { rating: number; amount: string }
+  sales: { days: string; amount: string }
 }

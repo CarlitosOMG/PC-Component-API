@@ -6,12 +6,12 @@ app.use(express.json())
 const PORT = 3000
 
 app.get('/', (_req, res) => {
-	console.log('Server is RUN!')
-	res.send('Hello')
+  console.log('Server is RUN!')
+  res.send('Hello')
 })
 
 app.use('/api/products', productsRouter)
 
 app.listen(PORT, () => {
-	console.log(`PORT ${PORT}`)
+  console.log(`PORT ${PORT}`)
 })
