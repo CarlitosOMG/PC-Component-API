@@ -27,3 +27,66 @@ export const getProductsByPriceRange = (
  })
  return filteredProducts
 }
+
+// Get products by category
+export const getProductsByCategory = (
+ categoryId: string
+): Array<productsEntry> => {
+ const productsByCategory = products.filter(
+  (product) => product.category.Id === categoryId
+ )
+ return productsByCategory
+}
+
+// Obtener productos por disponibilidad
+export const getProductsByAvailability = (
+ availability: boolean
+): Array<productsEntry> => {
+ const filteredProducts = products.filter((product: productsEntry) => {
+  return product.is_available === availability
+ })
+
+ return filteredProducts
+}
+
+// Define the sales threshold object with explicit types
+const salesThresholds: Record<string, number> = {
+ '+100': 100,
+ '+1000': 1000,
+ '+10000': 10000
+ // Add more thresholds as needed
+}
+
+// Get popular products by sales range
+export const getPopularProductsBySalesRange = (
+ salesRange: string
+): Array<productsEntry> => {
+ const minSalesCount = salesThresholds[salesRange]
+
+ if (minSalesCount === undefined) {
+  throw new Error('Invalid sales range')
+ }
+
+ const popularProducts = products.filter((product) => {
+  const salesCount = parseInt(
+   product.sales.amount.replace('+', '').replace(',', '')
+  )
+  return salesCount >= minSalesCount
+ })
+
+ return popularProducts
+}
+
+// Get products by keyword
+export const getProductsByKeyword = (keyword: string): Array<productsEntry> => {
+ const filteredProducts = products.filter((product: productsEntry) => {
+  // Check if keyword matches product title
+  const titleMatches = product.title
+   .toLowerCase()
+   .includes(keyword.toLowerCase())
+
+  return titleMatches
+ })
+
+ return filteredProducts
+}
